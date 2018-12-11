@@ -4,7 +4,7 @@ import './App.css';
 
 let Weight = (props) => (<h1 class="weight">{props.weight}</h1>);
 
-let Plates = (props) => (<h3>{props.name} plates: {props.plates}</h3>);
+let Plates = (props) => (<h4>{props.name} plates: {props.plates}</h4>);
 
 class App extends Component {
   state = {
@@ -70,6 +70,7 @@ class App extends Component {
             name="weight"
             placeholder="Total Weight (lbs)"
           />
+          <h3>Number of plates on either side of 45lb bar:</h3>
           <Plates name="45 lb" plates={this.state.fortyfives} />
           <Plates name="25 lb" plates={this.state.twentyfives} />
           <Plates name="10 lb" plates={this.state.tens} />
