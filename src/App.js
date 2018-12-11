@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-let Weight = (props) => (<h1>{props.weight}</h1>);
+let Weight = (props) => (<h1 class="weight">{props.weight}</h1>);
+
+let Plates = (props) => (<h3>{props.name} plates: {props.plates}</h3>);
 
 class App extends Component {
   state = {
@@ -16,7 +18,10 @@ class App extends Component {
 
   handleInputChange = event => {
     const initialWeight = parseInt(event.target.value);
-    console.log(initialWeight);
+    if (isNaN(initialWeight) || initialWeight < 45) {
+      this.setState({weight: "Please enter a valid weight over 45lbs"});
+      return;
+    }
 
     let processedWeight = initialWeight - 45; // 45 lb bar
     let fortyfives = 0;
@@ -52,13 +57,6 @@ class App extends Component {
       fives: fives,
       extra: extra
     })
-
-    // General version:
-
-    // const { name, value } = event.target;
-    // this.setState({
-    //   [name]: value
-    // });
   };
 
   render() {
@@ -72,11 +70,11 @@ class App extends Component {
             name="weight"
             placeholder="Total Weight (lbs)"
           />
-          <h3>45 lb plates: {this.state.fortyfives} </h3>
-          <h3>25 lb plates: {this.state.twentyfives} </h3>
-          <h3>10 lb plates: {this.state.tens} </h3>
-          <h3>5 lb plates: {this.state.fives} </h3>
-          <h3>Extra weight: {this.state.extra} </h3>
+          <Plates name="45 lb" plates={this.state.fortyfives} />
+          <Plates name="25 lb" plates={this.state.twentyfives} />
+          <Plates name="10 lb" plates={this.state.tens} />
+          <Plates name="5 lb" plates={this.state.fives} />
+          <Plates name="extra" plates={this.state.extra} />
           <img src={logo} className="App-logo" alt="logo" />
         </header>
       </div>
